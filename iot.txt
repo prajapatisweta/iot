@@ -1,0 +1,118 @@
+// python code
+//led pattern
+// import RPi.GPIO as GPIO
+// import time
+// 
+// GPIO.setwarnings(False)
+// GPIO.setmode(GPIO.BCM)
+// GPIO.setup(17, GPIO.OUT)
+// GPIO.setup(20, GPIO.OUT)
+// GPIO.setup(21, GPIO.OUT)
+// GPIO.setup(22, GPIO.OUT)
+// GPIO.setup(23, GPIO.OUT)
+// GPIO.setup(24, GPIO.OUT)
+
+// list = [17, 20, 21, 22, 23, 24]
+// while True:
+// 		for n in range(len(list)):
+//			GPIO.output(list[n], True)
+//			time.sleep(0.05)
+//			GPIO.output(list[n], False)
+//			time.sleep(0.05)
+// GPIO.cleanup()
+
+
+
+// for led blinking
+// import RPi.GPIO as GPIO
+// import time
+
+// GPIO.setwarnings(True)
+// GPIO.setmode(GPIO.BCM)
+// GPIO.setup(20, GPIO.OUT)
+
+// while True:
+//		print('LED on')
+//		GPIO.output(20, GPIO.LOW)
+//		print('LED off')
+//		GPIO.output(20, GPIO.HIGH)
+
+
+// python code 7 seg led
+//
+// import RPi.GPIO as GPIO
+// import time
+// import tables
+//
+// SDI = 25
+// RCLK = 27
+// SRCLK = 24
+// per_line = [0x7f, 0xbf, 0xdf, 0xef, 0xf7, 0xfb, 0xfd, 0xfe]
+
+// def print_msg():
+// 		print('Program is running...')
+// 		print('Please press ctrl+c to terminate program')
+
+// def setup():
+//		GPIO.setMode(GPIO.BCM)
+//		GPIO.setup(SDI, GPIO.OUT)
+//		GPIO.setup(RCLK, GPIO.OUT)
+//		GPIO.setup(SRCLK, GPIO.OUT)
+//		GPIO.output(SDI, GPIO.LOW)
+//		GPIO.output(RCLK, GPIO.LOW)
+//		GPIO.output(SRCLK, GPIO.LOW)
+
+// def hc595_in(dat):
+//		for bit in range (0, 8):
+//			GPIO.output(SDI, (1 & (dat >> bit)))
+//			GPIO.output(SRCLK, GPIO.HIGH)
+//			time.sleep(0.000001)
+// 			GPIO.output(SRCLK, GPIO.LOW)
+
+// def hc595_out():
+//		GPIO.output(RCLK, GPIO.HIGH)
+//		time.sleep(0.000001)
+//		GPIO.output(RCLK, GPIO.LOW)
+
+// def flash(table):
+//		for i in range(8):
+//			hc595_in(per_line[i])
+//			hc595_in(table[i])
+//			hc595_out()
+//		hc595_in(per_line[7])
+//		hc595_in(0x00)
+//		hc595_out()
+
+// def show(table, second):
+//		start = time.time()
+//		while True:
+//			flash(table)
+//			finish = time.time()
+//			if finish - start > second:
+//				break
+
+// def main():
+//		characters = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890!?,.<>'
+//		word = 'SunFounder'
+//		while True:
+//			for table in word:
+//				table = table.upper()
+//				show(tables.characters[table],1)
+//			time.sleep(1)
+//			show(tables.picture['creeper'],1)
+//			time.sleep(1)
+//			show(tables.picture['smile'],1)
+//			time.sleep(1)
+//			for character in characters:
+//				print("character : %s" %character)
+//				show(tables.characters[character],1)
+//			time.sleep(1)
+// def destroy():
+//		GPIO.cleanup()
+
+// if __name__ == '__main__':
+//		setup()
+//		try:
+//			main()
+//		except KeyboardInterrupt:
+//			destroy()
